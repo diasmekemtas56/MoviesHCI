@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <section class="auth-section">
+            <h2 class="section-heading">Вход</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="message {% if message.tags == 'success' %}success{% else %}error{% endif %}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p class="message error">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <p class="message error">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            <form method="post" class="auth-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                    {% if form.username.help_text %}
+                        <small class="help-text">{{ form.username.help_text }}</small>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    {{ form.password }}
+                    {% if form.password.help_text %}
+                        <small class="help-text">{{ form.password.help_text }}</small>
+                    {% endif %}
+                </div>
+                <button type="submit" class="auth-btn">Войти</button>
+            </form>
+            <p class="auth-link">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+        </section>
+    </div>
+</body>
+</html>
