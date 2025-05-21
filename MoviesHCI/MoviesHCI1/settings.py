@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure--8q9v^xxsxw621+04)m@cp8vx_&p$eo0v*kqu#)+uj7x=tfa^5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -122,6 +122,11 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_URL = '/static/'
+
+# Егер сіздің статикалық файлдарыңыз "static" деген папкада болса:
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
